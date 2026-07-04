@@ -1,0 +1,97 @@
+cpu - total util, current freq
+ram - total, used, avaliable, swap
+disk - every monted, name, used
+network - up/down, need to look at traffic, count bytes
+processes - every with scroll, show pid,cpu,mem,name,gpu,usename - sort by cpu/mem/abc
+uptime
+temperature
+battery - %,charging,remaining time
+Lan - machines on lan, ping, hostname, ip/mac
+
+refhresh loop
+keyboard for input
+
+libs:
+INFO:
+    - psutil ✅
+    - platform ❓
+UI/INPUT:
+    - rich ✅
+    - keyboard ✅ 
+NETWORKING
+    - socket ✅
+    - ipaddress ❓
+    - scapy ❓
+- asyncio ❓
+
+optional:
+per core
+refresh timer
+paralell data collection
+logs
+port scanning on command
+mac adress vendor lookup
+
+UI:
+borders
+tabs
+bars
+animations
+
+Architecture:
+tabs on top:
+    - system: cpu, mem, sensor
+    - disk
+    - processes
+    - network: info/lan
+
+
+Plan:
+research packages
+need to:
+    - get system/hardware infos
+    - ui package
+    - user input: scrolling/moving tabs
+script for every info
+design ui
+make main.py
+
+python -m venv .venv
+git init
+python main.py
+pip install xy
+pip freeze > requirements.txt
+
+
+
+
+
+
+2nd version things:
+UI:
+    colored text
+    scrolling
+    line change on everything and only selected is full transparency/not faded
+    preset delay times - change with ui
+    can pause data collection to not bother server but keep the client running
+    welcome page:
+        - one text field in the middle like a login screen: needs the IP
+        - saved list on the side: saved ips with name
+
+INFO:
+    GPU - each one different backend
+    each cpu core listed
+    swap memory
+    sensors - temp, fan, battery
+
+SECURITY:
+    ercrypted messages - this can be sensitive
+
+BACKEND:
+    optimize data gathering
+    logs
+
+
+
+
+
