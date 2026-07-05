@@ -6,7 +6,7 @@
     - connects to the server and shows the infos in tabs
     - arrow movement: side is tab change horizontal is line change
 ###### tabs:
-    - information
+    - general information
         - platfrom, hostname etc.
     - system stats
         - cpu: overall stats
@@ -23,6 +23,6 @@
 
 ### Communication format:
 ###### data types for each tab:
-    - info : for the information tab
+    - general : for the information tab
     - system : for the system stats
     - disk : for the disk data

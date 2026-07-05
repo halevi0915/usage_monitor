@@ -83,15 +83,12 @@ INFO:
     each cpu core listed
     swap memory
     sensors - temp, fan, battery
+    disk opts, free/used (v1.0.0 only %)
 
 SECURITY:
     ercrypted messages - this can be sensitive
+    password or sometihng so not anybody can request info
 
 BACKEND:
     optimize data gathering
     logs
-
-
-
-
-

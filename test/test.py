@@ -1,5 +1,5 @@
 from systeminfo import CpuInfo, MemoryInfo, DiskInfo, SensorInfo, ProcessInfo
-import settings
+import app.conf as conf
 import readchar
 import threading
 import time
@@ -11,6 +11,7 @@ disk = DiskInfo()
 sensor = SensorInfo()
 process = ProcessInfo()
 running = True
+delay = 1
 
 def keyboard_thread():
     global running
@@ -88,6 +89,6 @@ while running:
 
     process.update()
 
-    time.sleep(settings.Delay)
+    time.sleep(delay)
 
 print("STOPPED")
