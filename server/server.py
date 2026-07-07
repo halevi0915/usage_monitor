@@ -1,5 +1,5 @@
 import socket, threading, json
-from data_collection import get_data
+from server.data_collection import get_data
 from shared.conf import *
 from shared.models import *
 
@@ -35,7 +35,7 @@ class Server:
                         threading.Thread(target=self.handle_client, args=(client,)).start()
                     else:
                         print(f"[REJECTED]: {client.addr[0]}:{client.addr[1]}") #logs
-                        self.send(client, Packet(type="rejected"))
+                        self.send(client, Packet(type=-1))
                         self.disconnect_client(client)
                 except socket.timeout: pass
                 except OSError: pass

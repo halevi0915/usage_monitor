@@ -1,24 +1,23 @@
-import socket, threading, time, random
+import socket, threading, time
 from shared.conf import *
 from shared.models import *
 
 class Client:
-    def __init__(self):
+    def __init__(self, local_info):
         self.lock = threading.Lock()
-        self.connected = False
-        self.reconnect_loop()
+        self.local_info = local_info
 
 #=============================================================#
 
-    def reconnect_loop(self):
+    def run(self, ip):
         try:
-            while True:
+            while self.local_info.running:
                 try:
                     self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.sock.settimeout(SOCK_TIMEOUT)
-                    self.sock.connect((IP, PORT))
+                    self.sock.connect((ip, PORT))
                     print("[CONNECTED]")
-                    self.connected = True
+                    self.local_info.connected = True
                     self.buffer = b''
 
                     recv_t = threading.Thread(target=self.recv_loop)
@@ -45,14 +44,14 @@ class Client:
 #=============================================================#
 
     def send_loop(self):
-        while self.connected:
-            self.send(Packet(type=random.choice(["general", "system", "disk"])))
+        while self.local_info.connected:
+            self.send(Packet(type=self.local_info.current_tab))
             time.sleep(REQUEST_DELAY)
 
 #=============================================================#
 
     def recv_loop(self):
-        while self.connected:
+        while self.local_info.connected:
             try:
                 raw_packet = self.sock.recv(MAX_MSG_SIZE)
                 if not raw_packet:
@@ -72,16 +71,15 @@ class Client:
 
     def process_msg(self, msg):
         match msg.type:
-            case "general":
-                print(f"[GeneralInfo] {msg.content["hostname"]}")
-            case "system":
-                print(f"[SystemInfo] {msg.content["cpu_percent"]}")
-            case "disk":
-                print(f"[DisklInfo] {len(msg.content["partitions"])}")
+            case 0: self.local_info.general_info = msg.content
+            case 1: self.local_info.system_info = msg.content
+            case 2: self.local_info.disk_info = msg.content
+            case -1: print(f"ERROR: {msg.content}")
+
 
     def send(self, packet):
         try:
-            print(f"[SENT] {packet}")
+            #print(f"[SENT] {packet}")
             self.sock.sendall(packet.model_dump_json().encode() + b'\n')
         except Exception as e:
             print(f"[Send Error] - {e}")
@@ -89,12 +87,7 @@ class Client:
 
     def disconnect(self):
         with self.lock:
-            if not self.connected: return
+            if not self.local_info.connected: return
             print("[DISCONNECTING]")
-            self.connected = False
+            self.local_info.connected = False
             self.sock.close()
-
-#=============================================================#
-IP = input("Server IP: ").strip() or "127.0.0.1"
-
-Client()

@@ -1,5 +1,5 @@
 import signal, sys
-from server import Server
+from server.server import Server
 
 def shutdown_handler(signum, frame):
     print("[SIGTERM DETECTED]")

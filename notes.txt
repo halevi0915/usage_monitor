@@ -84,6 +84,7 @@ INFO:
     swap memory
     sensors - temp, fan, battery
     disk opts, free/used (v1.0.0 only %)
+    rest of general info
 
 SECURITY:
     ercrypted messages - this can be sensitive

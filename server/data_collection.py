@@ -3,15 +3,13 @@ from shared.models import Packet
 
 def get_data(type):
     match type:
-        case "general":
+        case 0:
             info = {
                 "hostname": socket.gethostname(),
                 "ip_address": socket.gethostbyname(socket.gethostname()),
                 "os": platform.system(),
-                "os_version": platform.version(),
-                "architecture": platform.architecture()[0],
             }
-        case "system":
+        case 1:
             info = {
                 "core_count": psutil.cpu_count(logical=False),
                 "uptime": psutil.boot_time(),
@@ -20,7 +18,7 @@ def get_data(type):
                 "virtual_memory_total": psutil.virtual_memory().total,
                 "virtual_memory_percent": psutil.virtual_memory().percent,
             }
-        case "disk":
+        case 2:
             info = {
                 "partitions": [{
                     "device": partition.device,

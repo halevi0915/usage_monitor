@@ -1,5 +1,5 @@
 from pydantic import BaseModel
 
 class Packet(BaseModel):
-    type: str
+    type: int
     content: dict | None = None
