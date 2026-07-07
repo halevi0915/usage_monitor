@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    container_name: usage_monitor
+    restart: unless-stopped
+    ports:
+      - "27379:27379"

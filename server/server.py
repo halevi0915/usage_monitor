@@ -1,4 +1,4 @@
-import socket, threading, json
+import socket, threading
 from server.data_collection import get_data
 from shared.conf import *
 from shared.models import *

@@ -1,4 +1,4 @@
-HOST = "127.0.0.1"
+HOST = "0.0.0.0"
 PORT = 27379
 
 SOCK_TIMEOUT = 1
